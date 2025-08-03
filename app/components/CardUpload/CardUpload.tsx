@@ -12,7 +12,6 @@ const CardUpload = () => {
     return (
         <View style={styles.container}>
             <View>
-
             </View>
             <View style={styles.topContainer}>
                 <View style={styles.leftSection}>

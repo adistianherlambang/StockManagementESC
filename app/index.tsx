@@ -36,7 +36,7 @@ export default function Index() {
             </TouchableOpacity>
           </View>
           <View style={styles.searchInput}>
-            <TextInput value={search} onChangeText={setSearch} style={{color: '#B6B6B6'}} placeholder="Cari Stok"/>
+            <TextInput value={search} onChangeText={setSearch} style={{color: '#B6B6B6'}} placeholder="Cari Stok" placeholderTextColor='#B6B6B6'/>
           </View>
           <View style={{gap: 8}}>
             <CardUpload/>
