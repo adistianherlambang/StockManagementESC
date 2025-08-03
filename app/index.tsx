@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { Text, View, StyleSheet, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard } from "react-native";
+import Card from "./components/Card/Card";
+import CardUpload from "./components/CardUpload/CardUpload";
+
 
 export default function Index() {
 
@@ -29,29 +32,15 @@ export default function Index() {
           <View style={styles.centeredFlex}>
             <Text style={{fontSize: 24, fontWeight: 500}}>Stok Barang</Text>
             <TouchableOpacity style={styles.buttonStok}>
-              <Text style={{color: 'white'}}>Tambah Stok</Text>
+              <Text style={{color: 'white', fontWeight: 700}}>Tambah Stok</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.searchInput}>
             <TextInput value={search} onChangeText={setSearch} style={{color: '#B6B6B6'}} placeholder="Cari Stok"/>
           </View>
-          <View>
-
-          </View>
-          <View style={{backgroundColor: '#773FF9', paddingHorizontal: 16, paddingVertical: 24, borderRadius: 16, justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center'}}>
-            <View style={{gap: 4}}>
-              <Text style={{color: 'white', fontWeight: 700, fontSize: 16}}>Samsung A16</Text>
-              <Text style={{color: 'white', fontSize: 12}}>Warna : <Text style={{fontWeight: 700}}>Merah</Text></Text>
-            </View>
-            <View style={{gap: 8, flexDirection: 'row'}}>
-              <TouchableOpacity style={{backgroundColor: 'white', width: 16, height: 16, alignItems: 'center', justifyContent: 'center', borderRadius: 100}}>
-                <Text style={{fontWeight: 700}}>-</Text>
-              </TouchableOpacity>
-              <Text style={{color: 'white', fontSize: 16, fontWeight: 700}}>16</Text>
-              <TouchableOpacity style={{backgroundColor: 'white', width: 16, height: 16, alignItems: 'center', justifyContent: 'center', borderRadius: 100}}>
-                <Text style={{fontWeight: 700}}>+</Text>
-              </TouchableOpacity>
-            </View>
+          <View style={{gap: 8}}>
+            <CardUpload/>
+            <Card/>
           </View>
         </View>
       </View>
@@ -74,13 +63,14 @@ const styles = StyleSheet.create ({
     alignItems: 'center',
   },
   buttonUser : {
-    backgroundColor: '#DA0909',
+    borderColor: '#DA0909',
+    borderWidth: 2,
     paddingVertical: 8,
     paddingHorizontal: 16,
     borderRadius: 100
   },
   buttonTextUser: {
-    color: 'white'
+    fontWeight: 700
   },
   buttonStok : {
     backgroundColor: '#773FF9',
