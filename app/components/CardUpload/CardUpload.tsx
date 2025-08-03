@@ -5,14 +5,12 @@ import { useState } from 'react'
 
 const CardUpload = () => {
 
-    const [radio, setRadio] = useState('')
-    const [stock, setStock] = useState()
-    const radioItem = ['merah', 'hijau']
+    const [radio, setRadio] = useState<string>('')
+    const [stock, setStock] = useState<number>(0)
+    const radioItem = ['Samsung', 'Xiaomi', 'Vivo', 'Oppo', 'Realme', 'Tecno', 'Infinix', 'IPhone']
 
     return (
         <View style={styles.container}>
-            <View>
-            </View>
             <View style={styles.topContainer}>
                 <View style={styles.leftSection}>
                     <TextInput style={styles.title} placeholder='Nama Produk' placeholderTextColor='#773FF9'/>
@@ -31,8 +29,23 @@ const CardUpload = () => {
                     </TouchableOpacity>
                 </View>
             </View>
-            <View>
-                
+            <View style={styles.radioGroup}>
+                {radioItem.map((item) => (
+                    <TouchableOpacity
+                    key={item}
+                    onPress={() => setRadio(item)}
+                    style={styles.radioWrapper}
+                    >
+                    <View style={styles.radioOuter}>
+                        {radio === item && <View style={styles.radioInner} />}
+                    </View>
+                    <Text style={styles.radioLabel}>{item}</Text>
+                    </TouchableOpacity>
+                ))}
+            </View>
+            <View style={{gap: 8}}>
+                <TouchableOpacity style={styles.submitButton}><Text style={{color: 'white', fontSize: 16}}>Simpan</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.cancelButton}><Text style={{color: '#773FF9', fontSize: 16}}>Cancel</Text></TouchableOpacity>
             </View>
         </View>
     )

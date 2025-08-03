@@ -3,7 +3,6 @@ import { Text, View, StyleSheet, TouchableOpacity, TextInput, TouchableWithoutFe
 import Card from "@/app/components/Card/Card";
 import CardUpload from "@/app/components/CardUpload/CardUpload";
 
-
 export default function Index() {
 
   const [click, setClick] = useState(false)
