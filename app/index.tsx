@@ -1,89 +1,32 @@
-import { useState } from "react";
-import { Text, View, StyleSheet, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard } from "react-native";
-import Card from "@/app/components/Card/Card";
-import CardUpload from "@/app/components/CardUpload/CardUpload";
-
+import { useEffect } from 'react';
+import { useRouter } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { View, ActivityIndicator } from 'react-native';
 
 export default function Index() {
+  const router = useRouter();
 
-  const [click, setClick] = useState(false)
-  const [search, setSearch] = useState('')
-  const [tambah, setTambah] = useState(false)
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const isLoggedIn = await AsyncStorage.getItem('isLoggedIn');
+        if (isLoggedIn === 'true') {
+          router.replace('/page/dashboard');
+        } else {
+          router.replace('/page/login');
+        }
+      } catch (error) {
+        console.error('Gagal memeriksa status login:', error);
+        router.replace('/page/login');
+      }
+    };
 
+    checkLoginStatus();
+  }, []);
 
   return (
-    <TouchableWithoutFeedback onPress={() => {Keyboard.dismiss();}}>
-      <View style={styles.container}>
-        <View style={styles.centeredFlex}>
-          <View style={{flexDirection: 'row', alignItems: 'center', gap: 16}}>
-            <View style={{backgroundColor: 'black', height: 58, width: 58, alignItems: 'center', justifyContent: 'center', borderRadius: 100}}>
-              <Text style={{color: 'white'}}>U</Text>
-            </View>
-            <View>
-              <Text>Hello, <Text style={{fontWeight: 700}}>User!</Text></Text>
-              <Text style={{color: '#B6B6B6'}}>Bismillah</Text>
-            </View>
-          </View>
-          <TouchableOpacity style={styles.buttonUser}>
-            <Text style={styles.buttonTextUser}>Logout</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={{gap:24}}>
-          <View style={styles.centeredFlex}>
-            <Text style={{fontSize: 24, fontWeight: 500}}>Stok Barang</Text>
-            <TouchableOpacity style={styles.buttonStok}>
-              <Text style={{color: 'white', fontWeight: 700}}>Tambah Stok</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.searchInput}>
-            <TextInput value={search} onChangeText={setSearch} style={{color: '#B6B6B6'}} placeholder="Cari Stok" placeholderTextColor='#B6B6B6'/>
-          </View>
-          <View style={{gap: 8}}>
-            <CardUpload/>
-            <Card/>
-          </View>
-        </View>
-      </View>
-    </TouchableWithoutFeedback>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <ActivityIndicator size="large" color="#773FF9" />
+    </View>
   );
 }
-
-const styles = StyleSheet.create ({
-  container: {
-    fontSize: 16,
-    paddingTop: 80,
-    paddingHorizontal: 32,
-    height: '100%',
-    gap: 32
-  },
-  centeredFlex: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  buttonUser : {
-    borderColor: '#DA0909',
-    borderWidth: 2,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 100
-  },
-  buttonTextUser: {
-    fontWeight: 700
-  },
-  buttonStok : {
-    backgroundColor: '#773FF9',
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 100
-  },
-  searchInput: {
-    backgroundColor: '#ecececff',
-    paddingVertical: 16,
-    paddingHorizontal: 24,
-    borderRadius: 100,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  }
-})

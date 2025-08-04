@@ -2,14 +2,21 @@ import { useState } from "react";
 import { Text, View, StyleSheet, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard } from "react-native";
 import Card from "@/app/components/Card/Card";
 import CardUpload from "@/app/components/CardUpload/CardUpload";
+import { Link, useRouter } from "expo-router";
+import { logout } from "@/app/utils/auth";
 
-export default function Index() {
+export default function Dashboard() {
+  const router = useRouter()
 
   const [click, setClick] = useState(false)
   const [search, setSearch] = useState('')
   const [tambah, setTambah] = useState(false)
 
-
+  const handleLogout = async () => {
+    logout()
+    router.replace('/')
+  }
+  
   return (
     <TouchableWithoutFeedback onPress={() => {Keyboard.dismiss();}}>
       <View style={styles.container}>
@@ -23,7 +30,7 @@ export default function Index() {
               <Text style={{color: '#B6B6B6'}}>Bismillah</Text>
             </View>
           </View>
-          <TouchableOpacity style={styles.buttonUser}>
+          <TouchableOpacity style={styles.buttonUser} onPress={handleLogout}>
             <Text style={styles.buttonTextUser}>Logout</Text>
           </TouchableOpacity>
         </View>
