@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 export const login = async (username: string, password: string) => {
   const q = query(
     collection(db, 'users'),
-    where('usernams', '==', username),
+    where('username', '==', username),
     where('password', '==', password)
   )
 
